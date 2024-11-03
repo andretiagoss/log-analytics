@@ -51,7 +51,7 @@ public class Startup
         .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
         {
             options.Cookie.HttpOnly = true;
-            options.Cookie.Name = CorsPolicy;
+            options.Cookie.Name = "AuthCookie";
             options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
             options.Cookie.SameSite = SameSiteMode.Lax;
             options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
@@ -65,7 +65,7 @@ public class Startup
     }
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        app.UseCors("MyCorsPolicy");
+        app.UseCors(CorsPolicy);
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthentication();
